@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Eliminar noticia | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main register-main">
+    <section class="section register-section">
+        <div class="section__heading register-section__heading">
+            <h1 class="section__title">Eliminar noticia</h1>
+            <p class="section__subtitle">Esta accion requiere confirmacion.</p>
+        </div>
+        <article class="post post--featured">
+            <div class="post__body">
+                <p class="post__text">¿Seguro que querés eliminar la noticia "{{ post.titulo }}"?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button class="button" type="submit">Confirmar</button>
+                    <a class="button" href="{% url 'post_detalle' post.pk %}">Cancelar</a>
+                </form>
+            </div>
+        </article>
+    </section>
+</main>
+{% endblock %}

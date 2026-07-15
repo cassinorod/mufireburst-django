@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Registro | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main register-main">
+    <section class="section register-section">
+        <div class="section__heading register-section__heading">
+            <h1 class="section__title">Crear cuenta</h1>
+            <p class="section__subtitle">Creá tu cuenta para acceder al portal y gestionar tu perfil.</p>
+        </div>
+        <form method="post" class="register-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button register-form__button" type="submit">Registrarme</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

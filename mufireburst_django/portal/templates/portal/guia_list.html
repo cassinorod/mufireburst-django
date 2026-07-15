@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Guias | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main register-main">
+    <section class="section register-section">
+        <div class="section__heading register-section__heading">
+            <h1 class="section__title">Guias</h1>
+            <p class="section__subtitle">Ayuda y tutoriales para jugadores.</p>
+        </div>
+        <div class="post-grid">
+            {% for guia in guias %}
+                <article class="post">
+                    <div class="post__body">
+                        <p class="post__date">Nivel: {{ guia.get_nivel_display }}</p>
+                        <h2 class="post__title">{{ guia.titulo }}</h2>
+                        <p class="post__text">{{ guia.descripcion }}</p>
+                        <a class="button" href="{% url 'guia_detalle' guia.pk %}">Leer guia</a>
+                    </div>
+                </article>
+            {% empty %}
+                <p class="section__subtitle">Todavia no hay guias cargadas.</p>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

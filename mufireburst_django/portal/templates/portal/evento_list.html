@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Eventos | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main events-main">
+    <section class="section events-section">
+        <div class="section__heading register-section__heading">
+            <h1 class="section__title">Eventos</h1>
+            <p class="section__subtitle">Eventos activos del servidor.</p>
+        </div>
+
+        <div class="events-page-list">
+            {% for evento in eventos %}
+                <article class="events-page-card">
+                    <div class="events-page-card__media">
+                        {% if evento.imagen %}
+                            <img alt="{{ evento.nombre }}" src="{% static 'portal/img/' %}{{ evento.imagen }}">
+                        {% else %}
+                            <img alt="Evento" src="{% static 'portal/img/event-devil-square.jpg' %}">
+                        {% endif %}
+                    </div>
+                    <div class="events-page-card__body">
+                        <span class="events-page-card__time">{{ evento.horario|default:"Sin horario" }}</span>
+                        <h2>{{ evento.nombre }}</h2>
+                        <p>{{ evento.descripcion }}</p>
+                    </div>
+                </article>
+            {% empty %}
+                <p class="section__subtitle">Todavia no hay eventos cargados.</p>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

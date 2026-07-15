@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal web de la comunidad MuFireburst.">
+    <title>{% block title %}{{ site_name }}{% endblock %}</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'portal/css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+<div class="page">
+    <header class="site-header">
+        <section class="server-bar">
+            <p class="server-bar__status">{{ server_status }}</p>
+            <div class="server-bar__links">
+                {% if user.is_authenticated %}
+                    <span>Usuario: {{ user.username }}</span>
+                {% else %}
+                    <span>Visitante</span>
+                {% endif %}
+            </div>
+        </section>
+
+        <nav class="navbar navbar-expand-lg navbar-dark menu-mu">
+            <div class="container-fluid menu-mu__container">
+                <a class="navbar-brand menu-mu__brand" href="{% url 'inicio' %}">
+                    <img alt="Logo MuFireburst" class="menu-mu__logo" src="{% static 'portal/img/logo-ej-titulo-1.png' %}">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="menuPrincipal">
+                    <ul class="navbar-nav mx-auto menu-mu__list">
+                        <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'inicio' %}">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'post_list' %}">Noticias</a></li>
+                        <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'descarga_list' %}">Descargas</a></li>
+                        <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'ranking' %}">Ranking</a></li>
+                        <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'tienda' %}">Tienda</a></li>
+                        <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'evento_list' %}">Eventos</a></li>
+                        <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'guia_list' %}">Guias</a></li>
+                        <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'contacto' %}">Contacto</a></li>
+
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'perfil' %}">Perfil</a></li>
+                            <li class="nav-item">
+                                <form method="post" action="{% url 'logout' %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button class="nav-link menu-mu__link bg-transparent border-0" type="submit">Salir</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'registro' %}">Registrar</a></li>
+                            <li class="nav-item"><a class="nav-link menu-mu__link" href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <a class="navbar-brand menu-mu__brand menu-mu__brand--right" href="{% url 'inicio' %}">
+                    <img alt="Logo MuFireburst" class="menu-mu__logo" src="{% static 'portal/img/logo-ej-titulo-1.png' %}">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    {% if messages %}
+        <section class="section" style="padding-top: 20px; padding-bottom: 0;">
+            {% for message in messages %}
+                <div class="alert alert-info">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer footer--simple">
+        <p class="footer__text">MuFireburst</p>
+    </footer>
+</div>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

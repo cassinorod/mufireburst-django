@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.titulo }} | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main register-main">
+    <section class="section register-section">
+        <article class="post post--featured">
+            <div class="post__body">
+                <p class="post__date">{{ post.fecha_creacion|date:"d/m/Y" }} - Autor: {{ post.autor.username }}</p>
+                <h1 class="post__title">{{ post.titulo }}</h1>
+                {% if post.subtitulo %}<p class="post__text"><strong>{{ post.subtitulo }}</strong></p>{% endif %}
+                <p class="post__text">{{ post.contenido|linebreaks }}</p>
+
+                <a class="button" href="{% url 'post_list' %}">Volver</a>
+                {% if user == post.autor or user.is_superuser %}
+                    <a class="button" href="{% url 'post_editar' post.pk %}">Editar</a>
+                    <a class="button" href="{% url 'post_eliminar' post.pk %}">Eliminar</a>
+                {% endif %}
+            </div>
+        </article>
+    </section>
+</main>
+{% endblock %}

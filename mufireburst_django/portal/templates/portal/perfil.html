@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main register-main">
+    <section class="section register-section">
+        <div class="section__heading register-section__heading">
+            <h1 class="section__title">Mi perfil</h1>
+            <p class="section__subtitle">Datos del usuario registrado.</p>
+        </div>
+        <article class="post post--featured">
+            <div class="post__body">
+                <h2 class="post__title">{{ user.username }}</h2>
+                <p class="post__text"><strong>Nombre:</strong> {{ perfil.nombre|default:"Sin completar" }}</p>
+                <p class="post__text"><strong>Apellido:</strong> {{ perfil.apellido|default:"Sin completar" }}</p>
+                <p class="post__text"><strong>Personaje favorito:</strong> {{ perfil.personaje_favorito|default:"Sin completar" }}</p>
+                <p class="post__text"><strong>Clase favorita:</strong> {{ perfil.clase_favorita|default:"Sin completar" }}</p>
+                <p class="post__text"><strong>Clan:</strong> {{ perfil.clan|default:"Sin clan" }}</p>
+                <a class="button" href="{% url 'editar_perfil' %}">Editar perfil</a>
+                <a class="button" href="{% url 'post_crear' %}">Crear noticia</a>
+            </div>
+        </article>
+    </section>
+</main>
+{% endblock %}

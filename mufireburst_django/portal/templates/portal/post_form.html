@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Formulario de noticia | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main register-main">
+    <section class="section register-section">
+        <div class="section__heading register-section__heading">
+            <h1 class="section__title">Formulario de noticia</h1>
+            <p class="section__subtitle">Completá los datos para publicar contenido.</p>
+        </div>
+
+        <form method="post" class="register-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button" type="submit">Guardar</button>
+            <a class="button" href="{% url 'post_list' %}">Cancelar</a>
+        </form>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Tienda | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main register-main shop-info-main">
+    <section class="section register-section shop-info-section">
+        <div class="section__heading register-section__heading">
+            <h1 class="section__title">Tienda</h1>
+            <p class="section__subtitle">Seccion informativa con items clasicos de Mu Online. No realiza compras reales.</p>
+        </div>
+
+        <div class="shop-info-grid">
+            <article class="shop-info-card shop-info-card--wide">
+                <div class="shop-info-card__image">
+                    <img src="{% static 'portal/img/shop/box-kundun-levels.png' %}" alt="Box of Kundun +1 a +5">
+                </div>
+                <div class="shop-info-card__body">
+                    <h2>Box of Kundun +1 a +5</h2>
+                    <p>Las Box of Kundun son cajas especiales de Mu Online que entregan recompensas aleatorias segun su nivel.</p>
+                    <ul class="shop-info-list">
+                        <li><strong>Box +1:</strong> recompensas iniciales para personajes de bajo nivel.</li>
+                        <li><strong>Box +2:</strong> mejores items y mayor dificultad de obtencion.</li>
+                        <li><strong>Box +3:</strong> recompensas intermedias para progresar.</li>
+                        <li><strong>Box +4:</strong> posibles items de mayor valor.</li>
+                        <li><strong>Box +5:</strong> una de las cajas mas buscadas del servidor.</li>
+                    </ul>
+                    <button class="button" type="button">Ver informacion</button>
+                </div>
+            </article>
+
+            <article class="shop-info-card shop-info-card--wide">
+                <div class="shop-info-card__image">
+                    <img src="{% static 'portal/img/shop/fenrir-pack-collage.png' %}" alt="Fenrir Pack">
+                </div>
+                <div class="shop-info-card__body">
+                    <h2>Fenrir Pack</h2>
+                    <p>Los Fenrir son monturas especiales, muy valoradas por su apariencia y utilidad dentro del juego.</p>
+                    <div class="fenrir-grid">
+                        <div><img src="{% static 'portal/img/shop/fenrir-blue.png' %}" alt="Fenrir azul"><span>Azul</span></div>
+                        <div><img src="{% static 'portal/img/shop/fenrir-black.png' %}" alt="Fenrir negro"><span>Negro</span></div>
+                        <div><img src="{% static 'portal/img/shop/fenrir-red.png' %}" alt="Fenrir rojo"><span>Rojo</span></div>
+                        <div><img src="{% static 'portal/img/shop/fenrir-gold.png' %}" alt="Fenrir dorado"><span>Dorado</span></div>
+                    </div>
+                    <p class="shop-note">El contenido puede variar segun la configuracion del servidor.</p>
+                    <button class="button" type="button">Ver informacion</button>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+{% endblock %}

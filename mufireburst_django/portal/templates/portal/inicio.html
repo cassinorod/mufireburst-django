@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Inicio | MuFireburst{% endblock %}
+
+{% block content %}
+<section class="home-hero-v4" id="inicio">
+    <div class="home-hero-v4__media">
+        <img alt="Banner principal MuFireburst" src="{% static 'portal/img/slider-banner.png' %}">
+    </div>
+
+    <div class="home-hero-v4__content">
+        <p class="home-hero-v4__status"><span></span> Servidor online</p>
+        <h1>MuFireburst</h1>
+        <p>
+            Portal oficial de la comunidad. Consultá noticias, eventos, ranking,
+            guías y descargas desde un solo lugar.
+        </p>
+
+        <div class="home-hero-v4__actions">
+            {% if user.is_authenticated %}
+                <a class="button" href="{% url 'perfil' %}">Mi perfil</a>
+                <a class="button button--ghost" href="{% url 'post_crear' %}">Crear noticia</a>
+            {% else %}
+                <a class="button" href="{% url 'registro' %}">Crear cuenta</a>
+                <a class="button button--ghost" href="{% url 'login' %}">Ingresar</a>
+            {% endif %}
+            <a class="button button--ghost" href="{% url 'descarga_list' %}">Descargar cliente</a>
+        </div>
+    </div>
+</section>
+
+<section class="home-shortcuts-v4" aria-label="Accesos principales">
+    <a href="{% url 'post_list' %}">
+        <strong>Noticias</strong>
+        <span>Novedades del servidor</span>
+    </a>
+    <a href="{% url 'evento_list' %}">
+        <strong>Eventos</strong>
+        <span>Horarios y recompensas</span>
+    </a>
+    <a href="{% url 'ranking' %}">
+        <strong>Ranking</strong>
+        <span>Top jugadores</span>
+    </a>
+    <a href="{% url 'guia_list' %}">
+        <strong>Guías</strong>
+        <span>Ayuda para avanzar</span>
+    </a>
+</section>
+
+<section class="section home-status-v4">
+    <div class="section__heading">
+        <h2 class="section__title">Información del servidor</h2>
+        <p class="section__subtitle">Datos rápidos para nuevos jugadores.</p>
+    </div>
+
+    <div class="home-status-v4__grid">
+        <article class="home-status-v4__card is-active">
+            <span>Estado</span>
+            <strong>Online</strong>
+            <p>Servidor disponible para ingresar.</p>
+        </article>
+        <article class="home-status-v4__card">
+            <span>Versión</span>
+            <strong>MuFireburst 1.02</strong>
+            <p>Experiencia clásica de Mu Online.</p>
+        </article>
+        <article class="home-status-v4__card">
+            <span>Eventos</span>
+            <strong>Activos</strong>
+            <p>Blood Castle, Devil Square y Castle Siege.</p>
+        </article>
+        <article class="home-status-v4__card">
+            <span>Comunidad</span>
+            <strong>Competitiva</strong>
+            <p>Ranking por nivel, resets y clan.</p>
+        </article>
+    </div>
+</section>
+
+<div class="home-layout-v4">
+    <main class="home-main-v4">
+        <section class="section home-news-v4" id="noticias">
+            <div class="section__heading section__heading--with-link">
+                <div>
+                    <h2 class="section__title">Últimas noticias</h2>
+                    <p class="section__subtitle">Comunicados, actualizaciones y novedades importantes.</p>
+                </div>
+                <a class="panel__link" href="{% url 'post_list' %}">Ver todas</a>
+            </div>
+
+            <div class="home-news-v4__grid">
+                {% for post in posts %}
+                    <article class="home-news-v4__card {% if forloop.first %}home-news-v4__card--featured{% endif %}">
+                        <p class="home-news-v4__date">{{ post.fecha_creacion|date:"d/m/Y" }}</p>
+                        <h3>{{ post.titulo }}</h3>
+                        <p>{{ post.subtitulo|default:post.contenido|truncatewords:22 }}</p>
+                        <a class="button" href="{% url 'post_detalle' post.pk %}">Leer noticia</a>
+                    </article>
+                {% empty %}
+                    <article class="home-news-v4__card home-news-v4__card--featured">
+                        <p class="home-news-v4__date">Primer contenido</p>
+                        <h3>Aún no hay noticias cargadas</h3>
+                        <p>Ingresá al panel admin para cargar la primera noticia del servidor.</p>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section home-steps-v4">
+            <div class="section__heading">
+                <h2 class="section__title">Primeros pasos</h2>
+                <p class="section__subtitle">Una guía simple para comenzar a jugar.</p>
+            </div>
+
+            <div class="home-steps-v4__list">
+                <article>
+                    <span>1</span>
+                    <div>
+                        <h3>Crear cuenta</h3>
+                        <p>Registrá tu usuario desde el portal.</p>
+                    </div>
+                </article>
+                <article>
+                    <span>2</span>
+                    <div>
+                        <h3>Descargar cliente</h3>
+                        <p>Ingresá en descargas y bajá el cliente completo.</p>
+                    </div>
+                </article>
+                <article>
+                    <span>3</span>
+                    <div>
+                        <h3>Leer guías</h3>
+                        <p>Revisá eventos, cajas Kundun, Fenrir y comandos.</p>
+                    </div>
+                </article>
+                <article>
+                    <span>4</span>
+                    <div>
+                        <h3>Competir</h3>
+                        <p>Subí de nivel y compará tu progreso en el ranking.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section home-events-v4" id="eventos">
+            <div class="section__heading section__heading--with-link">
+                <div>
+                    <h2 class="section__title">Eventos destacados</h2>
+                    <p class="section__subtitle">Actividades principales del servidor.</p>
+                </div>
+                <a class="panel__link" href="{% url 'evento_list' %}">Ver eventos</a>
+            </div>
+
+            <div class="home-events-v4__grid">
+                {% for evento in eventos|slice:":3" %}
+                    <article class="home-events-v4__card">
+                        <div class="home-events-v4__image">
+                            {% if evento.imagen %}
+                                <img alt="{{ evento.nombre }}" src="{% static 'portal/img/' %}{{ evento.imagen }}">
+                            {% else %}
+                                <img alt="Evento MuFireburst" src="{% static 'portal/img/event-blood-castle.jpg' %}">
+                            {% endif %}
+                        </div>
+                        <div class="home-events-v4__body">
+                            <h3>{{ evento.nombre }}</h3>
+                            <p>{{ evento.descripcion|truncatewords:18 }}</p>
+                            {% if evento.horario %}<strong>{{ evento.horario }}</strong>{% endif %}
+                        </div>
+                    </article>
+                {% empty %}
+                    <p class="section__subtitle">Todavía no hay eventos activos.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <aside class="home-sidebar-v4">
+        <section class="panel home-live-v4">
+            <h2 class="panel__title">Panel rápido</h2>
+            <p class="section__subtitle">Información útil para jugadores.</p>
+
+            <div class="home-live-v4__tabs">
+                <button class="is-active" type="button" data-home-tab="estado">Estado</button>
+                <button type="button" data-home-tab="eventos">Eventos</button>
+                <button type="button" data-home-tab="ranking">Ranking</button>
+            </div>
+
+            <div class="home-live-v4__content is-active" data-home-panel="estado">
+                <p><strong>Online</strong></p>
+                <p>Servidor disponible. Revisá descargas y guías antes de ingresar.</p>
+            </div>
+
+            <div class="home-live-v4__content" data-home-panel="eventos">
+                <p><strong>Eventos activos</strong></p>
+                <p>Blood Castle, Devil Square, Castle Siege y eventos especiales.</p>
+            </div>
+
+            <div class="home-live-v4__content" data-home-panel="ranking">
+                <p><strong>Competencia</strong></p>
+                <p>Consultá los jugadores con más resets y nivel dentro del servidor.</p>
+            </div>
+        </section>
+
+        <section class="panel home-ranking-v4">
+            <h2 class="panel__title">Top ranking</h2>
+            <ol>
+                {% for jugador in ranking %}
+                    <li>
+                        <span>#{{ jugador.posicion }}</span>
+                        <strong>{{ jugador.personaje }}</strong>
+                        <small>{{ jugador.resets }} resets</small>
+                    </li>
+                {% empty %}
+                    <li>No hay jugadores cargados.</li>
+                {% endfor %}
+            </ol>
+            <a class="button button--full" href="{% url 'ranking' %}">Ver ranking completo</a>
+        </section>
+
+        <section class="panel home-tools-v4">
+            <h2 class="panel__title">Accesos útiles</h2>
+            <a href="{% url 'descarga_list' %}">Descargar cliente</a>
+            <a href="{% url 'guia_list' %}">Guías del servidor</a>
+            <a href="{% url 'tienda' %}">Tienda informativa</a>
+            <a href="{% url 'contacto' %}">Contacto con staff</a>
+        </section>
+    </aside>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'portal/js/home.js' %}"></script>
+{% endblock %}

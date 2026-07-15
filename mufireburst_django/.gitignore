@@ -1,0 +1,19 @@
+# Entorno virtual
+env/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Base de datos local
+db.sqlite3
+
+# Archivos locales
+.env
+.DS_Store
+.vscode/
+
+# Produccion / estaticos generados
+staticfiles/
+media/

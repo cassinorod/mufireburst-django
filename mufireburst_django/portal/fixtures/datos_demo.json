@@ -1,0 +1,19 @@
+[
+  {"model": "portal.categoria", "pk": 1, "fields": {"nombre": "Apertura"}},
+  {"model": "portal.categoria", "pk": 2, "fields": {"nombre": "Eventos"}},
+  {"model": "portal.categoria", "pk": 3, "fields": {"nombre": "Actualizaciones"}},
+
+  {"model": "portal.evento", "pk": 1, "fields": {"nombre": "Blood Castle", "descripcion": "Evento especial para conseguir recompensas y experiencia.", "horario": "Todos los dias", "activo": true, "imagen": "event-blood-castle.jpg"}},
+  {"model": "portal.evento", "pk": 2, "fields": {"nombre": "Devil Square", "descripcion": "Evento de combate contra oleadas de monstruos.", "horario": "Cada 4 horas", "activo": true, "imagen": "event-devil-square.jpg"}},
+  {"model": "portal.evento", "pk": 3, "fields": {"nombre": "Castle Siege", "descripcion": "Evento de clanes para competir por el castillo.", "horario": "Domingos", "activo": true, "imagen": "event-castle-siege.jpg"}},
+
+  {"model": "portal.guia", "pk": 1, "fields": {"titulo": "Como empezar", "descripcion": "Primeros pasos para nuevos jugadores.", "contenido": "Crear una cuenta, descargar el cliente, entrar al servidor y reclamar el kit inicial.", "nivel": "basica", "fecha_creacion": "2026-01-01T10:00:00Z"}},
+  {"model": "portal.guia", "pk": 2, "fields": {"titulo": "Reset y progreso", "descripcion": "Explicacion basica del sistema de resets.", "contenido": "El personaje sube de nivel hasta llegar al nivel requerido y luego puede realizar reset para seguir progresando.", "nivel": "media", "fecha_creacion": "2026-01-02T10:00:00Z"}},
+
+  {"model": "portal.descarga", "pk": 1, "fields": {"nombre": "Cliente completo", "descripcion": "Cliente principal para instalar MuFireburst.", "tipo": "Cliente", "link": "", "activo": true}},
+  {"model": "portal.descarga", "pk": 2, "fields": {"nombre": "Parche actualizado", "descripcion": "Parche para actualizar archivos del juego.", "tipo": "Parche", "link": "", "activo": true}},
+
+  {"model": "portal.jugadorranking", "pk": 1, "fields": {"posicion": 1, "personaje": "RodBK", "clase": "Blade Knight", "nivel": 400, "resets": 250, "clan": "Fire"}},
+  {"model": "portal.jugadorranking", "pk": 2, "fields": {"posicion": 2, "personaje": "SoulPro", "clase": "Soul Master", "nivel": 400, "resets": 230, "clan": "Burst"}},
+  {"model": "portal.jugadorranking", "pk": 3, "fields": {"posicion": 3, "personaje": "Elfita", "clase": "Muse Elf", "nivel": 400, "resets": 210, "clan": "Argentina"}}
+]

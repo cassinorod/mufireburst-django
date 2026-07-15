@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ guia.titulo }} | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main register-main">
+    <section class="section register-section">
+        <article class="post post--featured">
+            <div class="post__body">
+                <p class="post__date">Nivel: {{ guia.get_nivel_display }}</p>
+                <h1 class="post__title">{{ guia.titulo }}</h1>
+                <p class="post__text"><strong>{{ guia.descripcion }}</strong></p>
+                <p class="post__text">{{ guia.contenido|linebreaks }}</p>
+                <a class="button" href="{% url 'guia_list' %}">Volver</a>
+            </div>
+        </article>
+    </section>
+</main>
+{% endblock %}

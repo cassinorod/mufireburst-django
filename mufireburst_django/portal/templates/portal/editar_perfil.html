@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Editar perfil | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main register-main">
+    <section class="section register-section">
+        <div class="section__heading register-section__heading">
+            <h1 class="section__title">Editar perfil</h1>
+            <p class="section__subtitle">Completá tus datos personales del servidor.</p>
+        </div>
+        <form method="post" class="register-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button" type="submit">Guardar</button>
+            <a class="button" href="{% url 'perfil' %}">Cancelar</a>
+        </form>
+    </section>
+</main>
+{% endblock %}

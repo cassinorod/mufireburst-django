@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: mufireburst-django
+    env: python
+    buildCommand: ./build.sh
+    startCommand: gunicorn mufireburst_django.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: .onrender.com
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://*.onrender.com

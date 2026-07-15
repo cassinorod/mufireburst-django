@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Noticias | MuFireburst{% endblock %}
+
+{% block content %}
+<main class="main register-main">
+    <section class="section register-section">
+        <div class="section__heading register-section__heading">
+            <h1 class="section__title">Noticias</h1>
+            <p class="section__subtitle">Novedades y publicaciones del servidor.</p>
+        </div>
+
+        <form method="get" class="register-form" style="margin-bottom: 30px;">
+            <div class="register-form__group">
+                <label class="register-form__label" for="q">Buscar noticia</label>
+                <input class="register-form__input" type="text" id="q" name="q" value="{{ q }}" placeholder="Buscar por titulo o contenido">
+            </div>
+            <div class="register-form__group">
+                <label class="register-form__label" for="categoria">Categoria</label>
+                <select class="register-form__input" name="categoria" id="categoria">
+                    <option value="">Todas</option>
+                    {% for categoria in categorias %}
+                        <option value="{{ categoria.id }}" {% if categoria_actual == categoria.id|stringformat:"s" %}selected{% endif %}>{{ categoria.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="button" type="submit">Buscar</button>
+            {% if user.is_authenticated %}
+                <a class="button" href="{% url 'post_crear' %}">Crear noticia</a>
+            {% endif %}
+        </form>
+
+        <div class="post-grid">
+            {% for post in posts %}
+                <article class="post">
+                    <div class="post__body">
+                        <p class="post__date">{{ post.fecha_creacion|date:"d/m/Y" }} {% if post.categoria %}- {{ post.categoria }}{% endif %}</p>
+                        <h2 class="post__title">{{ post.titulo }}</h2>
+                        <p class="post__text">{{ post.subtitulo|default:post.contenido|truncatewords:25 }}</p>
+                        <a class="button" href="{% url 'post_detalle' post.pk %}">Ver detalle</a>
+                    </div>
+                </article>
+            {% empty %}
+                <p class="section__subtitle">No se encontraron noticias.</p>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}
